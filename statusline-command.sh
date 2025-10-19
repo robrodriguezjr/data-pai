@@ -25,16 +25,13 @@ if [ -d "$claude_dir/commands" ]; then
     commands_count=$(ls -1 "$claude_dir/commands/"*.md 2>/dev/null | wc -l | tr -d ' ')
 fi
 
-# Count MCPs from settings.json (single parse)
+# Count MCPs from claude mcp list command
 mcp_names_raw=""
-if [ -f "$claude_dir/settings.json" ]; then
-    mcp_data=$(jq -r '.mcpServers | keys | join(" "), length' "$claude_dir/settings.json" 2>/dev/null)
-    mcp_names_raw=$(echo "$mcp_data" | head -1)
-    mcps_count=$(echo "$mcp_data" | tail -1)
-    # Handle case where mcpServers doesn't exist or is null
-    if [ -z "$mcps_count" ] || [ "$mcps_count" = "null" ]; then
-        mcps_count="0"
-    fi
+mcp_list_output=$(claude mcp list 2>/dev/null | grep -E "^[a-zA-Z0-9_-]+:" | head -n 20)
+if [ -n "$mcp_list_output" ]; then
+    mcps_count=$(echo "$mcp_list_output" | wc -l | tr -d ' ')
+    # Extract MCP names (everything before the first colon)
+    mcp_names_raw=$(echo "$mcp_list_output" | awk -F':' '{print $1}' | tr '\n' ' ')
 else
     mcps_count="0"
 fi
@@ -111,6 +108,7 @@ mcp_names_formatted=""
 for mcp in $mcp_names_raw; do
     case "$mcp" in
         "basic-memory") formatted="${MCP_MEMORY}Memory${RESET}" ;;
+        "todoist") formatted="${BRIGHT_ORANGE}Todoist${RESET}" ;;
         *) formatted="${MCP_DEFAULT}${mcp^}${RESET}" ;;
     esac
 
