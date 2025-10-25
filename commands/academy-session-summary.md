@@ -4,7 +4,7 @@ Summarize the most recent Academy transcript into a member-facing summary with k
 
 ## Process
 
-1. Find the most recent file in `/Users/robjr/Main Vault/Data/transcripts/` (regardless of filename)
+1. Find the most recent file in `/Volumes/home/Processed_Transcripts` (regardless of filename)
 2. Read the transcript content
 3. Spawn two specialized subagents to create summary content:
    - `session-summarizer`: Creates a 75-100 word engaging summary

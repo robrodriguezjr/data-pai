@@ -6,7 +6,7 @@ Process a 1:1 coaching session transcript through a three-agent workflow to gene
 
 ### 1. Get Transcript
 - Prompt user for the transcript filename if not provided
-- Read the transcript from `/Users/robjr/Main Vault/Data/transcripts/[filename]`
+- Read the transcript from `/Volumes/home/Processed_Transcripts/[filename]`
 
 ### 2. Extract Insights
 - Launch `transcript-insight-extractor` subagent with the full transcript
