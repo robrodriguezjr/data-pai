@@ -26,3 +26,12 @@ Pass a summary of:
 - Emerging interests
 
 to the `member-pulse` subagent.
+## Completion Format
+
+**IMPORTANT:** When you complete your task, end your response with:
+
+```
+🗣️ CUSTOM COMPLETED: Transcript analysis complete
+```
+
+This triggers an automatic voice notification. Keep the message under 8 words for best voice delivery.

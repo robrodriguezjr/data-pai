@@ -24,3 +24,12 @@ Save comprehensive report to:
 Include two sections:
 - **Member Pulse** → member needs, struggles, repeated questions
 - **Teaching Opportunities** → content/curriculum/blog angles to address them
+## Completion Format
+
+**IMPORTANT:** When you complete your task, end your response with:
+
+```
+🗣️ CUSTOM COMPLETED: Member analysis complete
+```
+
+This triggers an automatic voice notification. Keep the message under 8 words for best voice delivery.

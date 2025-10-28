@@ -57,3 +57,12 @@ Provide only the 75-100 word summary paragraph. No headers, bullets, or addition
 ## Example Tone
 
 "In this session, we dive deep into the heart of landscape composition using Gestalt principles – those powerful psychological rules that help our viewers' eyes move through our images with intention. I'll show you how to use proximity, similarity, and closure to create photographs that don't just document a scene, but tell a compelling visual story. We'll work through real examples from my recent shoots, breaking down exactly how these principles transform ordinary landscapes into images that truly connect with viewers on an emotional level."
+## Completion Format
+
+**IMPORTANT:** When you complete your task, end your response with:
+
+```
+🗣️ CUSTOM COMPLETED: Session summary complete
+```
+
+This triggers an automatic voice notification. Keep the message under 8 words for best voice delivery.

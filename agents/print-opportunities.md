@@ -25,3 +25,12 @@ Sections:
 - Pain points addressed vs ignored by competitors
 - Differentiation opportunities for Academy
 - Suggested new teaching angles (including AI)
+## Completion Format
+
+**IMPORTANT:** When you complete your task, end your response with:
+
+```
+🗣️ CUSTOM COMPLETED: Print research complete
+```
+
+This triggers an automatic voice notification. Keep the message under 8 words for best voice delivery.

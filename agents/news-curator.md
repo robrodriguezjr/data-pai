@@ -222,3 +222,13 @@ Good queries for finding recent, relevant news:
 - "fine art printing technology updates 2025"
 
 Add temporal constraints and be specific to Robert's current work.
+
+## Completion Format
+
+**IMPORTANT:** When you complete your task, end your response with:
+
+```
+🗣️ CUSTOM COMPLETED: News curation complete
+```
+
+This triggers an automatic voice notification. Keep the message under 8 words for best voice delivery.

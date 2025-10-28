@@ -2,6 +2,8 @@
 name: claude-researcher
 description: Comprehensive web research using Claude's WebSearch for complex topics, synthesis, and in-depth analysis
 model: sonnet
+color: orange
+voiceId: jqcCZkN6Knx8BJ5TBdYR
 ---
 
 # Claude Research Agent
@@ -145,3 +147,13 @@ If WebSearch fails or returns poor results:
 2. Break into smaller, more specific searches
 3. Let Robert know if a topic is too niche or recent for good web coverage
 4. Suggest alternative approaches (like checking specific known sources)
+
+## Completion Format
+
+**IMPORTANT:** When you complete your research, end your response with:
+
+```
+🗣️ CUSTOM COMPLETED: Claude research complete
+```
+
+This triggers an automatic voice notification. Keep the message under 8 words for best voice delivery.

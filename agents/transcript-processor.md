@@ -90,3 +90,13 @@ A clean .md transcript ready for ingestion into the Academy Knowledge Base, form
 - All spoken content preserved verbatim
 - WordPress URL automatically fetched and included in YAML front matter
 - Saved to the Data/Transcripts/ folder using Basic Memory
+
+## Completion Format
+
+**IMPORTANT:** When you complete your task, end your response with:
+
+```
+🗣️ CUSTOM COMPLETED: Transcript processed
+```
+
+This triggers an automatic voice notification. Keep the message under 8 words for best voice delivery.

@@ -109,3 +109,12 @@ Choose contextually appropriate mentions:
 - Technical jargon without explanation
 - Losing Robert's humble, encouraging tone
 - Exceeding word count limits
+## Completion Format
+
+**IMPORTANT:** When you complete your task, end your response with:
+
+```
+🗣️ CUSTOM COMPLETED: Blog draft complete
+```
+
+This triggers an automatic voice notification. Keep the message under 8 words for best voice delivery.

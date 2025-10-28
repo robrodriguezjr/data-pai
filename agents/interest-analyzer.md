@@ -116,3 +116,13 @@ Based on this profile, prioritize news about:
 - Focus on actionable insights, not exhaustive documentation
 - The profile will be passed to the news-curator agent
 - Your goal is to help surface the most relevant news for Robert's current work and interests
+
+## Completion Format
+
+**IMPORTANT:** When you complete your task, end your response with:
+
+```
+🗣️ CUSTOM COMPLETED: Interest analysis complete
+```
+
+This triggers an automatic voice notification. Keep the message under 8 words for best voice delivery.

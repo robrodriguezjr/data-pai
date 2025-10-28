@@ -77,3 +77,12 @@ Analyze Academy session transcripts to identify the most valuable takeaways and 
 • Practice the "five-frame exercise" on your next shoot: photograph the same subject using proximity, similarity, closure, continuity, and figure-ground principles
 • Review five of your recent landscape images and identify which Gestalt principles are working (or missing) in each composition
 • Try the "subtraction method" this week – start with a busy composition, then systematically remove elements until only the essential story remains
+## Completion Format
+
+**IMPORTANT:** When you complete your task, end your response with:
+
+```
+🗣️ CUSTOM COMPLETED: Takeaways extracted
+```
+
+This triggers an automatic voice notification. Keep the message under 8 words for best voice delivery.

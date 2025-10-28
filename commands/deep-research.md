@@ -1,5 +1,5 @@
 ---
-description: Comprehensive multi-source research using parallel Perplexity and Claude agents
+description: Comprehensive multi-source research using parallel Perplexity, Claude, and Gemini agents
 globs: ""
 alwaysApply: false
 ---
@@ -24,11 +24,12 @@ Execute parallel multi-source research and synthesize findings into coherent ins
 
 ### Step 1: Decompose the Question
 
-Break Robert's question into 2-4 focused angles:
+Break Robert's question into 4-6 focused angles:
 - Different aspects of the topic
 - Specific sub-questions
 - Related areas that provide context
 - Current state vs. emerging trends
+- Alternative perspectives for validation
 
 **Example:**
 Question: "Deep research on AI tools for photographers"
@@ -36,10 +37,12 @@ Question: "Deep research on AI tools for photographers"
 Decompose to:
 1. Current AI tools available for photography (Perplexity - for recent releases)
 2. Effectiveness and real-world usage (Claude - for synthesis of reviews/experiences)
-3. Future trends and emerging capabilities (Perplexity - for latest developments)
-4. Integration into professional workflows (Claude - for analysis and best practices)
+3. Professional photographer adoption and feedback (Gemini - for alternative perspective)
+4. Future trends and emerging capabilities (Perplexity - for latest developments)
+5. Integration into professional workflows (Claude - for analysis and best practices)
+6. Limitations and concerns (Gemini - for balanced view)
 
-### Step 2: Launch Both Agents in Parallel
+### Step 2: Launch All Agents in Parallel
 
 **CRITICAL:** Use a SINGLE message with MULTIPLE Task tool calls for parallel execution.
 
@@ -57,23 +60,36 @@ Task({
 })
 
 Task({
-  subagent_type: "perplexity-researcher",
+  subagent_type: "gemini-researcher",
   description: "Research angle 3",
-  prompt: "Research: [focused sub-question 3]. Find latest developments."
+  prompt: "Research: [focused sub-question 3]. Provide alternative perspective."
+})
+
+Task({
+  subagent_type: "perplexity-researcher",
+  description: "Research angle 4",
+  prompt: "Research: [focused sub-question 4]. Find latest developments."
 })
 
 Task({
   subagent_type: "claude-researcher",
-  description: "Research angle 4",
-  prompt: "Research: [focused sub-question 4]. Analyze best practices and recommendations."
+  description: "Research angle 5",
+  prompt: "Research: [focused sub-question 5]. Analyze best practices and recommendations."
+})
+
+Task({
+  subagent_type: "gemini-researcher",
+  description: "Research angle 6",
+  prompt: "Research: [focused sub-question 6]. Cross-validate findings."
 })
 ```
 
 **Strategy:**
-- Alternate between perplexity and claude based on query type
-- Perplexity: Current events, specs, recent releases, facts
-- Claude: Analysis, synthesis, comparisons, recommendations
-- Typically 2-4 agents total (not 10 like Daniel's system - keep it focused)
+- Smart agent assignment based on query type
+- **Perplexity:** Current events, specs, recent releases, breaking news, facts
+- **Claude:** Deep synthesis, analysis, comparisons, recommendations, domain expertise
+- **Gemini:** Alternative perspectives, cross-validation, third-party view
+- Typically 4-6 agents total (moderate parallelization - balanced speed and thoroughness)
 
 ### Step 3: Wait for Results
 
@@ -90,9 +106,8 @@ Create a clean synthesis following this structure:
 ## Key Findings
 
 ### [Topic Area 1]
-[Synthesized insights from both sources]
-[Note if both agents agree = high confidence]
-[Note if only one source = medium confidence]
+[Synthesized insights from all sources]
+**Confidence:** [High/Medium/Uncertain - with brief explanation]
 
 ### [Topic Area 2]
 [Continue pattern]
@@ -104,7 +119,12 @@ Create a clean synthesis following this structure:
 [Deeper insights - usually from Claude]
 
 ## Useful Sources
-[Key citations from both agents]
+[Key citations from all agents]
+
+## Research Metrics
+- **Agents deployed:** [count]
+- **Sources:** [Perplexity, Claude, Gemini]
+- **Overall confidence:** [High/Medium/Mixed - based on source agreement]
 
 ## Next Steps
 [Optional: Suggest only if relevant]
@@ -113,21 +133,24 @@ Create a clean synthesis following this structure:
 ### Step 5: Identify Confidence Levels
 
 **High Confidence:**
-- Both agents found similar information
+- 2+ agents found similar information
 - Multiple sources confirm the finding
 - Facts are well-documented
+- Cross-source validation successful
 
 **Medium Confidence:**
-- One agent found it, seems reliable
+- Single agent found it, seems reliable
 - Limited sources but authoritative
 - Recent developments with less validation
+- Reasonable but not extensively confirmed
 
 **Uncertain/Conflicting:**
 - Agents found different information
 - Sources disagree
 - Topic is emerging/unclear
+- Contradictory evidence requires more investigation
 
-Note confidence clearly when it matters for Robert's decision-making.
+Note confidence clearly when it matters for Robert's decision-making. Use confidence indicators throughout the synthesis, not just at the end.
 
 ## Output Style
 
@@ -162,29 +185,38 @@ Ask: "Want me to save this to your Data/research folder for future reference?"
 1. **Decompose:**
    - Latest printer technology and releases (Perplexity)
    - Professional photographer reviews and workflows (Claude)
+   - Alternative perspectives on print vs digital (Gemini)
    - Paper and ink innovations (Perplexity)
    - Best practices and trends (Claude)
+   - Print longevity and archival quality (Gemini)
 
-2. **Launch 4 agents in parallel** (single message, 4 Task calls)
+2. **Launch 6 agents in parallel** (single message, 6 Task calls)
 
 3. **Wait ~45 seconds** for all results
 
 4. **Synthesize:**
    - Combine findings by theme (not by agent)
-   - Note where both confirm (high confidence)
-   - Note unique insights from each
+   - Note where 2+ sources confirm (high confidence)
+   - Note single-source findings (medium confidence)
+   - Flag conflicts or disagreements (uncertain)
+   - Include research metrics
    - Structure clearly
 
 5. **Deliver:**
    - Clean, organized findings
+   - Confidence indicators throughout
+   - Research metrics at end
    - Robert's style throughout
    - Offer to save if substantial
 
 ## Important Notes
 
 - **Parallel execution is key** - Launch all agents in ONE message
-- **2-4 agents is enough** - Don't over-complicate like Daniel's 10-agent system
+- **4-6 agents is optimal** - Moderate parallelization balances speed and thoroughness
+- **Three research sources** - Perplexity (current), Claude (synthesis), Gemini (validation)
 - **Synthesize, don't concatenate** - Blend insights, don't just paste outputs
+- **Confidence tracking matters** - Note when sources agree (high) vs single-source (medium)
+- **Research metrics provide context** - Show agent count and overall confidence
 - **Quality over quantity** - Focus on signal, not noise
 - **Robert's style matters** - He values clear thinking over impressive formatting
 
@@ -192,8 +224,10 @@ Ask: "Want me to save this to your Data/research folder for future reference?"
 
 | Quick Research | Deep Research |
 |----------------|---------------|
-| Single agent | Multiple agents (2-4) |
+| Single agent | Multiple agents (4-6) |
 | Fast answer | Comprehensive synthesis |
-| Minutes | 1-2 minutes |
+| Under 1 minute | 1-2 minutes |
 | One perspective | Multi-source validation |
+| No confidence tracking | Confidence levels tracked |
 | Good for bounded questions | Good for complex topics |
+| 1 data source | 3 data sources (Perplexity + Claude + Gemini) |

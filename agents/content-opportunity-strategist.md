@@ -61,3 +61,13 @@ For each content opportunity:
 - Polymath Integration: Connect photography to broader creative/philosophical ideas
 - Scalable Impact: Prioritize content that serves many over content that serves one
 - Authentic Voice: Ensure all suggestions align with Robert's teaching style and values
+
+## Completion Format
+
+**IMPORTANT:** When you complete your task, end your response with:
+
+```
+🗣️ CUSTOM COMPLETED: Strategy analysis complete
+```
+
+This triggers an automatic voice notification. Keep the message under 8 words for best voice delivery.

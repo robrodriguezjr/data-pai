@@ -137,3 +137,13 @@ Identify:
 ## Deliver:
 
 A comprehensive but focused research report that gives the newsletter-writer clear direction on what to write about and why it matters now.
+
+## Completion Format
+
+**IMPORTANT:** When you complete your task, end your response with:
+
+```
+🗣️ CUSTOM COMPLETED: Content research complete
+```
+
+This triggers an automatic voice notification. Keep the message under 8 words for best voice delivery.

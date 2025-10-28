@@ -36,6 +36,13 @@ Route the research to the **right agent** based on the query type, then return r
 - ✅ Questions requiring context or nuance
 - ✅ Topics where you need to understand multiple perspectives
 
+### Use `gemini-researcher` agent for:
+- ✅ Alternative perspective or second opinion
+- ✅ Cross-validation of information
+- ✅ Different angle on a familiar topic
+- ✅ When you want a fresh take
+- ✅ Third-party viewpoint
+
 ### When uncertain:
 Default to `perplexity-researcher` for speed - it's the "quick" command after all.
 
@@ -88,7 +95,7 @@ This needs some synthesis - using Claude research for this.
 ## When to Offer Deep Research
 
 If the quick research reveals the topic is more complex than expected, mention:
-"This topic has quite a few angles. Want me to do deep research with both Perplexity and Claude for comprehensive coverage?"
+"This topic has quite a few angles. Want me to do deep research with all three sources (Perplexity, Claude, and Gemini) for comprehensive coverage?"
 
 Otherwise, just deliver the quick answer.
 

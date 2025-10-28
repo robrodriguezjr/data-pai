@@ -20,3 +20,12 @@ Identify the most meaningful insights and wisdom from Robert's reading notes, da
 
 ## Output
 Pass concise insights to the `connection-mapper` subagent.
+## Completion Format
+
+**IMPORTANT:** When you complete your task, end your response with:
+
+```
+🗣️ CUSTOM COMPLETED: Wisdom extracted
+```
+
+This triggers an automatic voice notification. Keep the message under 8 words for best voice delivery.

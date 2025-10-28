@@ -256,3 +256,13 @@ This is a gift you're giving someone—showing them the wisdom already present i
 - **Inspiring**: Make them excited about their journey
 
 Your goal: They should finish reading this analysis feeling seen, encouraged, and energized about their thinking and growth.
+
+## Completion Format
+
+**IMPORTANT:** When you complete your task, end your response with:
+
+```
+🗣️ CUSTOM COMPLETED: Brain dump analyzed
+```
+
+This triggers an automatic voice notification. Keep the message under 8 words for best voice delivery.

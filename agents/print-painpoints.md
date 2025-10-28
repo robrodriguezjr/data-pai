@@ -25,3 +25,12 @@ Identify and summarize the most frequent printing struggles photographers face.
 - Summary of top pain points
 - Quotes/examples where possible
 - Quick links to relevant Academy resources if available
+## Completion Format
+
+**IMPORTANT:** When you complete your task, end your response with:
+
+```
+🗣️ CUSTOM COMPLETED: Pain point analysis complete
+```
+
+This triggers an automatic voice notification. Keep the message under 8 words for best voice delivery.

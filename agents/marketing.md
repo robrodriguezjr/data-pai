@@ -27,3 +27,12 @@ Focus on funnels, email campaigns, landing pages, and messaging that align with 
 
 [startup-response]
 Marketing subagent ready ✅
+## Completion Format
+
+**IMPORTANT:** When you complete your task, end your response with:
+
+```
+🗣️ CUSTOM COMPLETED: Marketing strategy complete
+```
+
+This triggers an automatic voice notification. Keep the message under 8 words for best voice delivery.

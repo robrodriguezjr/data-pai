@@ -66,3 +66,13 @@ Wins: X ✅ (momentum status)
 - Progress > Perfection always
 
 Remember: Help them see progress, understand patterns, and feel motivated for tomorrow!
+
+## Completion Format
+
+**IMPORTANT:** When you complete your task, end your response with:
+
+```
+🗣️ CUSTOM COMPLETED: Reflection analysis complete
+```
+
+This triggers an automatic voice notification. Keep the message under 8 words for best voice delivery.
