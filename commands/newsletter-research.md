@@ -7,7 +7,7 @@ Orchestrates comprehensive newsletter research and draft creation.
 ### 1. Discovery Phase
 
 First, look for existing newsletter lists:
-- Check `/Data/newsletter/sources.md` for curated newsletter URLs
+- Check `/Data/newsletter/research links.md` for curated newsletter URLs
 - Check any files in `/Data/` that might contain newsletter references
 - If not found, ask the user to provide newsletter URLs or topics to research
 
