@@ -1,40 +1,151 @@
 ---
 name: research
-description: Multi-source comprehensive research using perplexity-researcher, claude-researcher, and gemini-researcher agents. Launches up to 10 parallel research agents for fast results. USE WHEN user says 'do research', 'research X', 'find information about', 'investigate', 'analyze trends', 'current events', or any research-related request.
+description: Intelligent research system using Perplexity and Claude for quick answers or deep dives. Quick by default, comprehensive when needed.
 ---
 
 # Research Skill
 
-## When to Use This Skill
+## Auto-Activation
 
-This skill activates when the user requests research or information gathering:
-- "Do research on X"
-- "Research this topic"
-- "Find information about X"
-- "Investigate this subject"
-- "Analyze trends in X"
-- "Current events research"
-- Any comprehensive information gathering request
+This skill activates when Robert asks research-oriented questions:
 
-## How to Execute
+**Quick research triggers:**
+- "Research X"
+- "Look up Y"
+- "What's the latest on Z"
+- "Find information about..."
+- "Quick research on..."
 
-**Execute the `/conduct-research` slash command**, which handles the complete workflow:
+**Deep research triggers:**
+- "Deep research on X"
+- "Comprehensive research about..."
+- "Do thorough research on..."
+- "I need detailed information on..."
+- "In-depth research into..."
 
-1. Decomposing research questions into 3-10 sub-questions
-2. Launching up to 10 parallel research agents (perplexity, claude, gemini)
-3. Collecting results in 15-30 seconds
-4. Synthesizing findings with confidence levels
-5. Formatting comprehensive report with source attribution
+## How It Works
+
+### Detection & Routing
+
+When a research request is detected:
+
+1. **Identify depth needed:**
+   - Quick: Simple questions, recent facts, bounded topics
+   - Deep: Complex topics, decision-making research, multi-faceted subjects
+
+2. **Execute appropriate command:**
+   - Quick → `/quick-research` command
+   - Deep → `/deep-research` command
+
+3. **Commands handle the rest:**
+   - Agent selection
+   - Query execution
+   - Result synthesis
+   - Robert-style formatting
+
+## The System Architecture
+
+```
+Robert's Question
+      ↓
+Research Skill (auto-detects)
+      ↓
+   ┌──────────┴──────────┐
+   ↓                     ↓
+Quick Research       Deep Research
+(single agent)      (parallel agents)
+   ↓                     ↓
+   ├─ perplexity       ├─ perplexity (2 angles)
+   └─ OR claude        └─ claude (2 angles)
+      ↓                     ↓
+   Fast answer      Synthesized insights
+```
 
 ## Available Research Agents
 
-- All agents with "researcher" in their name in the agents directory.
+**perplexity-researcher:**
+- Fast Perplexity API searches
+- Best for current events, facts, recent info
+- Great for "what's the latest" questions
 
-## Speed Benefits
+**claude-researcher:**
+- Comprehensive WebSearch with synthesis
+- Best for complex topics, analysis, comparisons
+- Strong with photography/education/creative topics
 
-- ❌ **Old approach**: Sequential searches → 5-10 minutes
-- ✅ **New approach**: 10 parallel agents → Under 1 minute
+## Examples
 
-## Full Workflow Reference
+**Auto-detected quick research:**
+```
+Robert: "Look up the new Canson Infinity papers released this year"
+→ Skill activates
+→ Loads /quick-research
+→ Routes to perplexity-researcher
+→ Returns findings
+```
 
-For complete step-by-step instructions: `read ~/Data/.claude/commands/conduct-research.md`
+**Auto-detected deep research:**
+```
+Robert: "Deep research on AI tools for photographers"
+→ Skill activates
+→ Loads /deep-research
+→ Launches 2-4 parallel agents
+→ Synthesizes multi-source findings
+→ Returns comprehensive report
+```
+
+**Manual invocation:**
+```
+Robert: "/quick-research latest developments in neural rendering"
+Robert: "/deep-research state of photography education online"
+```
+
+## Key Features
+
+✅ **Automatic detection** - Just ask naturally
+✅ **Intelligent routing** - Right tool for the job
+✅ **Fast by default** - Quick research unless you specify deep
+✅ **Parallel execution** - Deep research runs multiple agents simultaneously
+✅ **Robert's style** - All outputs match your voice and preferences
+✅ **Optional persistence** - Save valuable research to Basic Memory
+✅ **No mandatory formats** - Clean, useful answers
+
+## When to Use Each Mode
+
+**Quick Research:**
+- Need an answer fast
+- Question is specific and bounded
+- Recent facts or current events
+- Simple lookup or verification
+
+**Deep Research:**
+- Making a decision based on research
+- Topic is complex or multi-faceted
+- Need synthesis from multiple sources
+- Want comprehensive understanding
+- Preparing for teaching or content creation
+
+## Notes
+
+- The skill just detects and routes - commands do the work
+- Agents handle the actual research execution
+- Everything is designed to be fast and useful
+- No complex formats or mandatory structures
+- Built for your workflow, not imposed patterns
+
+## Setup Required
+
+Before using research features:
+
+1. **Add your Perplexity API key** to `~/.claude/.env`:
+   ```
+   PERPLEXITY_API_KEY=your_key_here
+   ```
+
+2. **Get API key** from: https://www.perplexity.ai/settings/api
+
+3. **Test the system:**
+   - Try: "Quick research on AI image generation"
+   - Try: "Deep research on fine art printing trends"
+
+That's it. The skill handles everything else automatically.
