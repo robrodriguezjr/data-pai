@@ -1,5 +1,5 @@
 ---
-name: perplexity-research
+name: perplexity-researcher
 description: Fast web research using Perplexity AI for current information, trends, and factual queries
 model: sonnet
 ---

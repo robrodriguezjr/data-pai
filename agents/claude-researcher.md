@@ -1,5 +1,5 @@
 ---
-name: claude-research
+name: claude-researcher
 description: Comprehensive web research using Claude's WebSearch for complex topics, synthesis, and in-depth analysis
 model: sonnet
 ---
