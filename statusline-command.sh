@@ -14,15 +14,30 @@ model_name=$(echo "$input" | jq -r '.model.display_name')
 # Get directory name
 dir_name=$(basename "$current_dir")
 
+# Find project's .claude directory by walking up from current_dir
+find_project_claude_dir() {
+    local dir="$1"
+    while [ "$dir" != "/" ]; do
+        if [ -d "$dir/.claude" ]; then
+            echo "$dir/.claude"
+            return 0
+        fi
+        dir=$(dirname "$dir")
+    done
+    # Fallback to $HOME/.claude if no project .claude found
+    echo "$HOME/.claude"
+}
+
+project_claude_dir=$(find_project_claude_dir "$current_dir")
+
 # Count items from specified directories
-claude_dir="$HOME/.claude"
 commands_count=0
 mcps_count=0
 fabric_count=0
 
-# Count commands (optimized - direct ls instead of find)
-if [ -d "$claude_dir/commands" ]; then
-    commands_count=$(ls -1 "$claude_dir/commands/"*.md 2>/dev/null | wc -l | tr -d ' ')
+# Count commands from project's .claude/commands directory
+if [ -d "$project_claude_dir/commands" ]; then
+    commands_count=$(ls -1 "$project_claude_dir/commands/"*.md 2>/dev/null | wc -l | tr -d ' ')
 fi
 
 # Count MCPs from claude mcp list command

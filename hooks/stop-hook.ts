@@ -19,66 +19,73 @@ const VOICE_ID = 'NNl6r8mD7vthiJatiJt1';
 const VOICE_SERVER = 'http://localhost:8888/notify';
 
 function extractCompletionMessage(transcript: string): string | null {
-  // Parse JSONL and extract only assistant text messages (not tool results)
+  // Parse JSONL and find the MOST RECENT assistant message only
   const lines = transcript.trim().split('\n');
-  let assistantMessages: string[] = [];
 
+  // Search backwards for the last assistant message
   for (let i = lines.length - 1; i >= 0; i--) {
     try {
       const entry = JSON.parse(lines[i]);
 
       // Only look at assistant messages
       if (entry.type === 'assistant' && entry.message?.content) {
+        // Combine all text content from this assistant message
+        let fullText = '';
         for (const content of entry.message.content) {
           // Only text content from assistant, not tool_use
           if (content.type === 'text' && content.text) {
-            assistantMessages.push(content.text);
+            fullText += content.text + '\n';
           }
         }
+
+        if (!fullText) continue;
+
+        // Now search for completion markers in this message only
+        // Priority 1: Voice-optimized custom completed (under 8 words)
+        const customMatch = fullText.match(/🗣️\s*CUSTOM\s+COMPLETED:\s*(.+?)(?:\n|$)/im);
+
+        if (customMatch) {
+          const message = customMatch[1]
+            .trim()
+            .replace(/\[.*?\]/g, '')
+            .replace(/\*+/g, '')
+            .trim();
+
+          const wordCount = message.split(/\s+/).length;
+          if (message && wordCount <= 8) {
+            debug('Found custom completion message in last assistant message', { message });
+            return message;
+          }
+        }
+
+        // Priority 2: Standard completed
+        const completedPatterns = [
+          /🎯\s*COMPLETED:\s*(.+?)(?:\n|$)/i,
+          /COMPLETED:\s*(.+?)(?:\n|$)/i,
+        ];
+
+        for (const pattern of completedPatterns) {
+          const match = fullText.match(pattern);
+          if (match && match[1]) {
+            let message = match[1].trim().replace(/\*+/g, '');
+
+            if (message && message.length > 5) {
+              debug('Found standard completion message in last assistant message', { message });
+              return message;
+            }
+          }
+        }
+
+        // Found the last assistant message but no completion marker
+        debug('Last assistant message has no completion marker - no voice notification');
+        return null;
       }
     } catch (e) {
       // Invalid JSON line, skip
     }
   }
 
-  // Now search through assistant messages only (newest first)
-  for (const text of assistantMessages) {
-    // Priority 1: Voice-optimized custom completed (under 8 words)
-    const customMatch = text.match(/🗣️\s*CUSTOM\s+COMPLETED:\s*(.+?)(?:\n|$)/im);
-
-    if (customMatch) {
-      const message = customMatch[1]
-        .trim()
-        .replace(/\[.*?\]/g, '')
-        .replace(/\*+/g, '')
-        .trim();
-
-      const wordCount = message.split(/\s+/).length;
-      if (message && wordCount <= 8) {
-        debug('Found custom completion message', { message, source: 'assistant_text' });
-        return message;
-      }
-    }
-
-    // Priority 2: Standard completed
-    const completedPatterns = [
-      /🎯\s*COMPLETED:\s*(.+?)(?:\n|$)/i,
-      /COMPLETED:\s*(.+?)(?:\n|$)/i,
-    ];
-
-    for (const pattern of completedPatterns) {
-      const match = text.match(pattern);
-      if (match && match[1]) {
-        let message = match[1].trim().replace(/\*+/g, '');
-
-        if (message && message.length > 5) {
-          debug('Found standard completion message', { message, source: 'assistant_text' });
-          return message;
-        }
-      }
-    }
-  }
-
+  debug('No assistant messages found in transcript');
   return null;
 }
 
