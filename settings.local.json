@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/robjr/Documents/Personal_AI_Infrastructure/**)",
+      "Read(//Users/robjr/**)",
+      "Bash(curl:*)",
+      "Bash(find:*)",
+      "Bash(cat:*)"
+    ]
+  },
+  "enableAllProjectMcpServers": true
+}
