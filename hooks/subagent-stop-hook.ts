@@ -80,14 +80,16 @@ async function findTaskResult(transcriptPath: string, maxAttempts: number = 10):
 }
 
 function extractCompletionMessage(taskOutput: string): string | null {
+  // Markers must be at the start of a line (no preceding text on that line)
   // Priority 1: Voice-optimized custom completed (under 8 words)
-  const customMatch = taskOutput.match(/🗣️\s*CUSTOM\s+COMPLETED:\s*(.+?)(?:\n|$)/im);
+  const customMatch = taskOutput.match(/^🗣️\s*CUSTOM\s+COMPLETED:\s*(.+?)$/im);
 
   if (customMatch) {
     const message = customMatch[1]
       .trim()
       .replace(/\[.*?\]/g, '')
       .replace(/\*+/g, '')
+      .replace(/`/g, '')
       .trim();
 
     const wordCount = message.split(/\s+/).length;
@@ -96,7 +98,24 @@ function extractCompletionMessage(taskOutput: string): string | null {
     }
   }
 
-  // Priority 2: Standard completed with agent tag
+  // Priority 2: Conversational voice summary (under 30 words)
+  const sayMatch = taskOutput.match(/^🗣️\s*SAY:\s*(.+?)$/im);
+
+  if (sayMatch) {
+    const message = sayMatch[1]
+      .trim()
+      .replace(/\[.*?\]/g, '')
+      .replace(/\*+/g, '')
+      .replace(/`/g, '')
+      .trim();
+
+    const wordCount = message.split(/\s+/).length;
+    if (message && wordCount <= 30) {
+      return message;
+    }
+  }
+
+  // Priority 3: Standard completed with agent tag
   const completedPatterns = [
     /🎯\s*COMPLETED:\s*\[AGENT:(\w+)\]\s*(.+?)(?:\n|$)/is,
     /COMPLETED:\s*\[AGENT:(\w+)\]\s*(.+?)(?:\n|$)/is,

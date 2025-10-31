@@ -41,14 +41,16 @@ function extractCompletionMessage(transcript: string): string | null {
         if (!fullText) continue;
 
         // Now search for completion markers in this message only
+        // Markers must be at the start of a line (no preceding text on that line)
         // Priority 1: Voice-optimized custom completed (under 8 words)
-        const customMatch = fullText.match(/🗣️\s*CUSTOM\s+COMPLETED:\s*(.+?)(?:\n|$)/im);
+        const customMatch = fullText.match(/^🗣️\s*CUSTOM\s+COMPLETED:\s*(.+?)$/im);
 
         if (customMatch) {
           const message = customMatch[1]
             .trim()
             .replace(/\[.*?\]/g, '')
             .replace(/\*+/g, '')
+            .replace(/`/g, '')
             .trim();
 
           const wordCount = message.split(/\s+/).length;
@@ -58,7 +60,25 @@ function extractCompletionMessage(transcript: string): string | null {
           }
         }
 
-        // Priority 2: Standard completed
+        // Priority 2: Conversational voice summary (under 30 words)
+        const sayMatch = fullText.match(/^🗣️\s*SAY:\s*(.+?)$/im);
+
+        if (sayMatch) {
+          const message = sayMatch[1]
+            .trim()
+            .replace(/\[.*?\]/g, '')
+            .replace(/\*+/g, '')
+            .replace(/`/g, '')
+            .trim();
+
+          const wordCount = message.split(/\s+/).length;
+          if (message && wordCount <= 30) {
+            debug('Found conversational SAY message in last assistant message', { message });
+            return message;
+          }
+        }
+
+        // Priority 3: Standard completed
         const completedPatterns = [
           /🎯\s*COMPLETED:\s*(.+?)(?:\n|$)/i,
           /COMPLETED:\s*(.+?)(?:\n|$)/i,
