@@ -1,10 +1,10 @@
 # Academy Session Summary
 
-Process a raw Academy transcript through the complete workflow: clean/format with URL, then generate member-facing summary with key takeaways and action items.
+Process a raw Academy Live Session (LS) transcript through the complete workflow: clean/format with URL, then generate member-facing summary with key takeaways and action items.
 
 ## Process
 
-1. Find the most recent file in `/Volumes/home/Creative Path Workshops/Raw Transscriptds/` (regardless of filename)
+1. Find the most recent file in `/Volumes/home/Processed_Transcripts` (regardless of filename)
 2. Run `transcript-processor` agent to:
    - Clean and format the transcript with YAML front matter
    - Fetch WordPress URL from live_session API
@@ -20,8 +20,9 @@ Process a raw Academy transcript through the complete workflow: clean/format wit
 
 ```
 # Step 1: Find most recent raw transcript
-Use Glob tool to find latest file in /Volumes/home/Creative Path Workshops/Raw Transscriptds/
-Pattern: "/Volumes/home/Creative Path Workshops/Raw Transscriptds/*.txt"
+Use Glob tool to find latest file in /Volumes/home/Processed_Transcripts/
+Pattern: "*.md"
+Path: "/Volumes/home/Processed_Transcripts"
 Sort by modification time, take most recent (regardless of filename)
 
 # Step 2: Run transcript-processor agent
